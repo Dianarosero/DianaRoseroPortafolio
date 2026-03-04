@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { Download, Mail, ArrowRight } from 'lucide-react';
+import dianitaAvatar from '../assets/Dianita_Avatar.png';
 
 export default function Hero() {
   return (
@@ -66,7 +67,7 @@ export default function Hero() {
         >
           <div className="aspect-square rounded-3xl overflow-hidden border border-white/10 bg-surface relative z-10">
             <img 
-              src="https://picsum.photos/seed/developer/800/800" 
+              src={dianitaAvatar} 
               alt="Diana Sofia" 
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               referrerPolicy="no-referrer"

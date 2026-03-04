@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, Heart } from 'lucide-react';
+import { Github, Linkedin, Twitter, Heart } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -17,13 +17,22 @@ export default function Footer() {
           </div>
 
           <div className="flex gap-6">
-            <a href="#" className="text-foreground/50 hover:text-primary transition-colors">
+            <a
+              href="https://github.com/Dianarosero"
+              className="text-foreground/50 hover:text-primary transition-colors"
+            >
               <Github size={20} />
             </a>
-            <a href="#" className="text-foreground/50 hover:text-primary transition-colors">
+            <a
+              href="https://www.linkedin.com/in/diana-sofia-rosero-lópez-044150207/"
+              className="text-foreground/50 hover:text-primary transition-colors"
+            >
               <Linkedin size={20} />
             </a>
-            <a href="#" className="text-foreground/50 hover:text-primary transition-colors">
+            <a
+              href="#"
+              className="text-foreground/50 hover:text-primary transition-colors"
+            >
               <Twitter size={20} />
             </a>
           </div>
@@ -32,7 +41,8 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-foreground/30 uppercase tracking-widest font-bold">
           <p>© {currentYear} Diana Sofia. Todos los derechos reservados.</p>
           <p className="flex items-center gap-1">
-            Hecho con <Heart size={12} className="text-red-500 fill-red-500" /> usando React & Tailwind
+            Hecho con <Heart size={12} className="text-red-500 fill-red-500" />{" "}
+            usando React & Tailwind
           </p>
         </div>
       </div>

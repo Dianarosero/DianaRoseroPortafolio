@@ -37,7 +37,7 @@ export default function Navbar() {
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center gap-2 text-2xl font-bold tracking-tighter text-primary"
         >
-          <img src={favicon} alt="Diana Rosero logo" className="h-8 w-8" />
+          <img src={favicon} alt="Diana Rosero logo" className="h-11 w-11" />
         </motion.div>
 
         {/* Desktop Links */}

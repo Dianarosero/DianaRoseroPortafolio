@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
+import favicon from "../assets/favicon.png";
 
 const navLinks = [
   { name: "Inicio", href: "#inicio" },
@@ -34,13 +35,9 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-2xl font-bold tracking-tighter text-primary"
+          className="flex items-center gap-2 text-2xl font-bold tracking-tighter text-primary"
         >
-          <img
-            src="/src/assets/favicon.png"
-            alt="Diana Rosero Avatar"
-            className="w-12 h-12 rounded-full object-cover"
-          />
+          <img src={favicon} alt="Diana Rosero logo" className="h-8 w-8" />
         </motion.div>
 
         {/* Desktop Links */}

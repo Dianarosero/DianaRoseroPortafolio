@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "title": "E-Commerce Moderno",
+    "description": "Una plataforma de comercio electrónico con carrito de compras, pagos integrados y panel de administración.",
+    "image": "https://picsum.photos/seed/shop/800/600",
+    "tags": ["React", "Tailwind", "Node.js", "Stripe"],
+    "demo": "https://example.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": 2,
+    "title": "Dashboard de Analíticas",
+    "description": "Visualización de datos en tiempo real con gráficos interactivos y filtrado avanzado.",
+    "image": "https://picsum.photos/seed/chart/800/600",
+    "tags": ["TypeScript", "D3.js", "React Query"],
+    "demo": "https://example.com",
+    "github": "https://github.com"
+  },
+  {
+    "id": 3,
+    "title": "App de Gestión de Tareas",
+    "description": "Herramienta de productividad con soporte para drag-and-drop y sincronización en la nube.",
+    "image": "https://picsum.photos/seed/task/800/600",
+    "tags": ["React", "Firebase", "Framer Motion"],
+    "demo": "https://example.com",
+    "github": "https://github.com"
+  }
+]

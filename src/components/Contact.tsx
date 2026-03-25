@@ -1,32 +1,101 @@
-import { motion } from "motion/react";
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import {
+  Github,
+  Linkedin,
   Mail,
   MapPin,
   Phone,
   Send,
-  Github,
-  Linkedin,
-  Twitter,
-} from "lucide-react";
-import React, { useState } from "react";
+} from 'lucide-react';
+import { motion } from 'motion/react';
+import type { ChangeEvent, FormEvent, ReactElement } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import SectionHeading from './SectionHeading';
+import { VIEWPORT_ONCE } from '../data/animations';
+import { SOCIAL_LINKS } from '../data/socialLinks';
+import type { SocialPlatform } from '../data/socialLinks';
 
-export default function Contact() {
-  const [formState, setFormState] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+interface FormState {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface ContactDetail {
+  readonly label: string;
+  readonly value: string;
+  readonly icon: ReactElement;
+}
+
+const INITIAL_FORM_STATE: FormState = {
+  name: '',
+  email: '',
+  message: '',
+};
+
+const CONTACT_DETAILS: readonly ContactDetail[] = [
+  {
+    label: 'Email',
+    value: 'dianasofiaroserol@gmail.com',
+    icon: <Mail size={24} />,
+  },
+  {
+    label: 'Teléfono',
+    value: '+57 315 6268049',
+    icon: <Phone size={24} />,
+  },
+  {
+    label: 'Ubicación',
+    value: 'San Juan de Pasto, Colombia',
+    icon: <MapPin size={24} />,
+  },
+];
+
+const SOCIAL_ICONS: Record<SocialPlatform, ReactElement> = {
+  github: <Github size={20} />,
+  linkedin: <Linkedin size={20} />,
+};
+
+export default function Contact(): ReactElement {
+  const [formState, setFormState] = useState<FormState>(INITIAL_FORM_STATE);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const submitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    return () => {
+      if (submitTimerRef.current) {
+        clearTimeout(submitTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = event.target;
+    setFormState((previousState) => ({
+      ...previousState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setIsSubmitting(true);
-    // Simular envío
-    setTimeout(() => {
+
+    if (submitTimerRef.current) {
+      clearTimeout(submitTimerRef.current);
+    }
+
+    submitTimerRef.current = setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      setFormState({ name: "", email: "", message: "" });
+      setFormState(INITIAL_FORM_STATE);
     }, 1500);
   };
 
@@ -37,83 +106,46 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
           >
-            <h2 className="text-sm font-bold tracking-widest text-primary uppercase mb-4">
-              Contacto
-            </h2>
-            <h3 className="text-4xl font-bold mb-8">
-              ¿Tienes un proyecto en mente?
-            </h3>
-            <p className="text-foreground/60 text-lg mb-12 leading-relaxed">
-              Estoy siempre abierta a discutir nuevos proyectos, ideas creativas
-              o oportunidades para ser parte de tus visiones.
-            </p>
+            <SectionHeading
+              eyebrow="Contacto"
+              title="¿Tienes un proyecto en mente?"
+              description="Estoy siempre abierta a discutir nuevos proyectos, ideas creativas o oportunidades para ser parte de tus visiones."
+              descriptionClassName="text-foreground/60 text-lg mb-12 leading-relaxed"
+            />
 
             <div className="space-y-8">
-              <div className="flex items-center gap-6">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-primary">
-                  <Mail size={24} />
+              {CONTACT_DETAILS.map((detail) => (
+                <div key={detail.label} className="flex items-center gap-6">
+                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-primary">
+                    {detail.icon}
+                  </div>
+                  <div>
+                    <p className="text-sm text-foreground/50 uppercase tracking-widest font-bold mb-1">
+                      {detail.label}
+                    </p>
+                    <p className="text-lg font-medium">{detail.value}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-foreground/50 uppercase tracking-widest font-bold mb-1">
-                    Email
-                  </p>
-                  <p className="text-lg font-medium">
-                    dianasofiaroserol@gmail.com
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-6">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-primary">
-                  <Phone size={24} />
-                </div>
-                <div>
-                  <p className="text-sm text-foreground/50 uppercase tracking-widest font-bold mb-1">
-                    Teléfono
-                  </p>
-                  <p className="text-lg font-medium">+57 315 6268049</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-6">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-center text-primary">
-                  <MapPin size={24} />
-                </div>
-                <div>
-                  <p className="text-sm text-foreground/50 uppercase tracking-widest font-bold mb-1">
-                    Ubicación
-                  </p>
-                  <p className="text-lg font-medium">
-                    San Juan de Pasto, Colombia
-                  </p>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="flex gap-4 mt-12">
-              {[
-                {
-                  icon: <Github size={20} />,
-                  href: "https://github.com/Dianarosero",
-                },
-                {
-                  icon: <Linkedin size={20} />,
-                  href: "https://www.linkedin.com/in/diana-sofia-rosero-lópez-044150207/",
-                },
-                { icon: <Twitter size={20} />, href: "#" },
-              ].map((social, i) => (
+              {SOCIAL_LINKS.map((social) => (
                 <motion.a
-                  key={i}
+                  key={social.platform}
                   href={social.href}
                   whileHover={{
                     y: -5,
-                    backgroundColor: "rgba(16, 185, 129, 0.1)",
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
                   }}
                   className="w-12 h-12 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-foreground/70 hover:text-primary transition-colors"
+                  target={social.external ? '_blank' : undefined}
+                  rel={social.external ? 'noreferrer noopener' : undefined}
+                  aria-label={social.label}
                 >
-                  {social.icon}
+                  {SOCIAL_ICONS[social.platform]}
                 </motion.a>
               ))}
             </div>
@@ -122,7 +154,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             className="p-8 md:p-12 rounded-3xl bg-white/5 border border-white/5 relative overflow-hidden"
           >
             {submitted ? (
@@ -139,6 +171,7 @@ export default function Contact() {
                   Gracias por contactarme. Te responderé lo antes posible.
                 </p>
                 <button
+                  type="button"
                   onClick={() => setSubmitted(false)}
                   className="text-primary font-bold hover:underline"
                 >
@@ -153,12 +186,11 @@ export default function Contact() {
                   </label>
                   <input
                     required
+                    name="name"
                     type="text"
                     placeholder="Tu nombre"
                     value={formState.name}
-                    onChange={(e) =>
-                      setFormState({ ...formState, name: e.target.value })
-                    }
+                    onChange={handleInputChange}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
@@ -168,12 +200,11 @@ export default function Contact() {
                   </label>
                   <input
                     required
+                    name="email"
                     type="email"
                     placeholder="tu@email.com"
                     value={formState.email}
-                    onChange={(e) =>
-                      setFormState({ ...formState, email: e.target.value })
-                    }
+                    onChange={handleInputChange}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
@@ -183,12 +214,11 @@ export default function Contact() {
                   </label>
                   <textarea
                     required
+                    name="message"
                     rows={5}
                     placeholder="Cuéntame sobre tu proyecto..."
                     value={formState.message}
-                    onChange={(e) =>
-                      setFormState({ ...formState, message: e.target.value })
-                    }
+                    onChange={handleInputChange}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:outline-none focus:border-primary transition-colors resize-none"
                   />
                 </div>
@@ -198,7 +228,7 @@ export default function Contact() {
                   disabled={isSubmitting}
                   className="w-full bg-primary text-background font-bold py-5 rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 transition-all"
                 >
-                  {isSubmitting ? "Enviando..." : "Enviar Mensaje"}{" "}
+                  {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}{' '}
                   <Send size={18} />
                 </motion.button>
               </form>

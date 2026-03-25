@@ -1,17 +1,16 @@
-import { motion, AnimatePresence } from "motion/react";
-import { Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
-import favicon from "../assets/favicon.png";
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
-const navLinks = [
-  { name: "Inicio", href: "#inicio" },
-  { name: "Sobre mí", href: "#sobre-mi" },
-  { name: "Proyectos", href: "#proyectos" },
-  { name: "Skills", href: "#skills" },
-  { name: "Contacto", href: "#contacto" },
-];
+import { AnimatePresence, motion } from 'motion/react';
+import { Menu, X } from 'lucide-react';
+import type { ReactElement } from 'react';
+import { useEffect, useState } from 'react';
+import favicon from '../assets/favicon.png';
+import { NAV_LINKS } from '../data/navigation';
 
-export default function Navbar() {
+export default function Navbar(): ReactElement {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -19,16 +18,35 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEsc);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
   }, []);
 
   return (
     <nav
+      aria-label="Navegación principal"
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-white/10 py-4"
-          : "bg-transparent py-6"
+          ? 'bg-background/80 backdrop-blur-md border-b border-white/10 py-4'
+          : 'bg-transparent py-6'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
@@ -42,7 +60,7 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex gap-8">
-          {navLinks.map((link, i) => (
+          {NAV_LINKS.map((link, i) => (
             <motion.a
               key={link.name}
               href={link.href}
@@ -59,8 +77,12 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
+          type="button"
           className="md:hidden text-foreground"
           onClick={() => setIsOpen(!isOpen)}
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
+          aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -71,12 +93,13 @@ export default function Navbar() {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-background border-b border-white/10 overflow-hidden"
+            id="mobile-navigation"
           >
             <div className="flex flex-col p-6 gap-4">
-              {navLinks.map((link) => (
+              {NAV_LINKS.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}

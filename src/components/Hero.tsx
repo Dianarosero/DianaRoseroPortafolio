@@ -1,8 +1,15 @@
-import { motion } from "motion/react";
-import { Download, Mail, ArrowRight } from "lucide-react";
-import dianitaAvatar from "../assets/Dianita_Avatar.png";
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
-export default function Hero() {
+import { Download, Mail } from 'lucide-react';
+import { motion } from 'motion/react';
+import type { ReactElement } from 'react';
+import dianitaAvatar from '../assets/Dianita_Avatar.png';
+import { VIEWPORT_ONCE } from '../data/animations';
+
+export default function Hero(): ReactElement {
   return (
     <section
       id="inicio"
@@ -16,7 +23,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           transition={{ duration: 0.8 }}
         >
           <motion.span
@@ -48,11 +55,13 @@ export default function Hero() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 bg-primary text-background px-8 py-4 rounded-xl font-bold transition-all hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]"
+              aria-label="Ir a la sección de contacto"
             >
               Contáctame <Mail size={18} />
             </motion.a>
 
             <motion.button
+              type="button"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 border border-white/10 bg-white/5 hover:bg-white/10 px-8 py-4 rounded-xl font-bold transition-all"
@@ -65,7 +74,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           transition={{ duration: 0.8 }}
           className="relative"
         >

@@ -317,7 +317,7 @@ export default function ProjectMatchStudio(): ReactElement {
                 </p>
                 <button
                   type="button"
-                  disabled={!GEMINI_ENABLED || isAiLoading}
+                  disabled={isAiLoading}
                   onClick={handleGenerateAi}
                   className="px-4 py-2 rounded-xl bg-primary text-background font-bold text-sm disabled:opacity-50 flex items-center gap-2"
                 >
@@ -327,10 +327,14 @@ export default function ProjectMatchStudio(): ReactElement {
               </div>
               {!GEMINI_ENABLED ? (
                 <p className="text-xs text-foreground/60 mt-3">
-                  Para mantener costo cero, la IA está desactivada por defecto. Se activa con
-                  `VITE_GEMINI_API_KEY` (puedes usar free tier).
+                  Si acabas de configurar la clave, reinicia `npm run dev` para activar Gemini.
+                  Si no hay clave, el botón mostrará un error de configuración.
                 </p>
-              ) : null}
+              ) : (
+                <p className="text-xs text-foreground/60 mt-3">
+                  Gemini activo. Puedes generar propuestas IA en modo free tier según tu cuota.
+                </p>
+              )}
               {aiError ? <p className="text-xs text-red-300 mt-3">{aiError}</p> : null}
               {aiText ? (
                 <div className="mt-4 rounded-xl border border-white/10 bg-background/60 p-4">

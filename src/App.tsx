@@ -11,6 +11,7 @@ import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
+import ProjectMatchStudio from './components/ProjectMatchStudio';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -35,6 +36,7 @@ export default function App(): ReactElement {
         <Hero />
         <About />
         <Projects />
+        <ProjectMatchStudio />
         <Skills />
         <Contact />
       </main>

@@ -8,6 +8,7 @@ Este es un portafolio moderno y responsivo para desarrolladores frontend, constr
 - **Animaciones Elegantes:** Implementadas con Framer Motion (fade-in, stagger, scroll triggers).
 - **Stack Moderno:** React 19, Tailwind CSS 4, Lucide Icons.
 - **Gestión de Datos:** Proyectos cargados dinámicamente desde un archivo JSON.
+- **Project Match Studio:** Recomendador interactivo con scoring de proyectos, stack sugerido y roadmap.
 - **Formulario de Contacto:** Con validación básica y estados de envío.
 - **SEO Optimizado:** Estructura semántica y metadatos configurados.
 
@@ -29,6 +30,14 @@ La aplicación estará disponible en `http://localhost:3000`.
 npm run build
 ```
 Los archivos optimizados se generarán en la carpeta `dist/`.
+
+### 4. Activar modo IA opcional (free tier)
+El Project Match Studio funciona sin IA por defecto (costo cero).
+Si quieres generación con Gemini, crea tu `.env` con:
+
+```bash
+VITE_GEMINI_API_KEY="TU_API_KEY"
+```
 
 ## 🎨 Personalización de Colores
 

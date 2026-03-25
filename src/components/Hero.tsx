@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Download, Mail } from 'lucide-react';
+import { Compass, Mail } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { ReactElement } from 'react';
 import dianitaAvatar from '../assets/Dianita_Avatar.png';
@@ -60,14 +60,15 @@ export default function Hero(): ReactElement {
               Contáctame <Mail size={18} />
             </motion.a>
 
-            <motion.button
-              type="button"
+            <motion.a
+              href="#match-studio"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 border border-white/10 bg-white/5 hover:bg-white/10 px-8 py-4 rounded-xl font-bold transition-all"
+              aria-label="Ir a Project Match Studio"
             >
-              Descargar CV <Download size={18} />
-            </motion.button>
+              Explorar Match Studio <Compass size={18} />
+            </motion.a>
           </div>
         </motion.div>
 

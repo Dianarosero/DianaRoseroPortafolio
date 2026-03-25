@@ -6,21 +6,10 @@
 import { ExternalLink, Github } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { ReactElement } from 'react';
+
 import SectionHeading from './SectionHeading';
+import { PROJECTS } from '../data/projects';
 import { VIEWPORT_ONCE } from '../data/animations';
-import projectsData from '../data/projects.json';
-
-interface Project {
-  readonly id: number;
-  readonly title: string;
-  readonly description: string;
-  readonly image: string;
-  readonly tags: readonly string[];
-  readonly demo: string;
-  readonly github: string;
-}
-
-const projects: readonly Project[] = projectsData;
 
 export default function Projects(): ReactElement {
   return (
@@ -32,7 +21,7 @@ export default function Projects(): ReactElement {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={VIEWPORT_ONCE}
           >
-            <SectionHeading eyebrow="Portafolio" title="Proyectos Destacados" />
+            <SectionHeading eyebrow="Portafolio" title="Proyectos destacados" />
           </motion.div>
 
           <motion.p
@@ -47,7 +36,7 @@ export default function Projects(): ReactElement {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, i) => (
+          {PROJECTS.map((project, i) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 30 }}
@@ -86,16 +75,21 @@ export default function Projects(): ReactElement {
                   </div>
                 </div>
               </div>
-              
+
               <div className="p-8 flex-1 flex flex-col">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
-                    <span key={tag} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-white/5 text-foreground/50">
+                    <span
+                      key={tag}
+                      className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-white/5 text-foreground/50"
+                    >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h4 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h4>
+                <h4 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                  {project.title}
+                </h4>
                 <p className="text-foreground/60 text-sm leading-relaxed mb-6 flex-1">
                   {project.description}
                 </p>
@@ -107,7 +101,7 @@ export default function Projects(): ReactElement {
                     target="_blank"
                     rel="noreferrer noopener"
                   >
-                    Ver Demo <ExternalLink size={14} />
+                    Ver demo <ExternalLink size={14} />
                   </a>
                 </div>
               </div>

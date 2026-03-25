@@ -6,7 +6,12 @@
     "image": "https://picsum.photos/seed/shop/800/600",
     "tags": ["React", "Tailwind", "Node.js", "Stripe"],
     "demo": "https://example.com",
-    "github": "https://github.com"
+    "github": "https://github.com",
+    "domains": ["ecommerce"],
+    "goals": ["conversion", "retention"],
+    "complexity": "high",
+    "timelineWeeks": 10,
+    "impactScore": 5
   },
   {
     "id": 2,
@@ -15,7 +20,12 @@
     "image": "https://picsum.photos/seed/chart/800/600",
     "tags": ["TypeScript", "D3.js", "React Query"],
     "demo": "https://example.com",
-    "github": "https://github.com"
+    "github": "https://github.com",
+    "domains": ["analytics", "operations"],
+    "goals": ["insights", "automation"],
+    "complexity": "high",
+    "timelineWeeks": 8,
+    "impactScore": 5
   },
   {
     "id": 3,
@@ -24,6 +34,39 @@
     "image": "https://picsum.photos/seed/task/800/600",
     "tags": ["React", "Firebase", "Framer Motion"],
     "demo": "https://example.com",
-    "github": "https://github.com"
+    "github": "https://github.com",
+    "domains": ["productivity"],
+    "goals": ["automation", "engagement"],
+    "complexity": "medium",
+    "timelineWeeks": 6,
+    "impactScore": 4
+  },
+  {
+    "id": 4,
+    "title": "Portal de Operaciones",
+    "description": "Panel para equipos operativos con alertas, trazabilidad de procesos y seguimiento de KPIs críticos.",
+    "image": "https://picsum.photos/seed/ops/800/600",
+    "tags": ["React", "TypeScript", "Node.js", "PostgreSQL"],
+    "demo": "https://example.com",
+    "github": "https://github.com",
+    "domains": ["operations", "analytics"],
+    "goals": ["automation", "insights"],
+    "complexity": "high",
+    "timelineWeeks": 12,
+    "impactScore": 5
+  },
+  {
+    "id": 5,
+    "title": "Landing de Marca Personal",
+    "description": "Sitio de alto impacto visual orientado a posicionamiento de marca y captación de leads.",
+    "image": "https://picsum.photos/seed/brand/800/600",
+    "tags": ["React", "Tailwind", "Framer Motion", "SEO"],
+    "demo": "https://example.com",
+    "github": "https://github.com",
+    "domains": ["branding"],
+    "goals": ["engagement", "conversion"],
+    "complexity": "low",
+    "timelineWeeks": 4,
+    "impactScore": 3
   }
 ]

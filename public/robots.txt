@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://diana-rosero-portafolio.vercel.app/sitemap.xml

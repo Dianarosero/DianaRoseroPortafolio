@@ -10,6 +10,7 @@ import {
   MapPin,
   Phone,
   Send,
+  Sparkles,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { ChangeEvent, FormEvent, ReactElement } from 'react';
@@ -29,6 +30,10 @@ interface ContactDetail {
   readonly label: string;
   readonly value: string;
   readonly icon: ReactElement;
+}
+
+interface ContactProps {
+  readonly onOpenMatchStudio: () => void;
 }
 
 const INITIAL_FORM_STATE: FormState = {
@@ -60,7 +65,7 @@ const SOCIAL_ICONS: Record<SocialPlatform, ReactElement> = {
   linkedin: <Linkedin size={20} />,
 };
 
-export default function Contact(): ReactElement {
+export default function Contact({ onOpenMatchStudio }: ContactProps): ReactElement {
   const [formState, setFormState] = useState<FormState>(INITIAL_FORM_STATE);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -114,6 +119,16 @@ export default function Contact(): ReactElement {
               description="Estoy siempre abierta a discutir nuevos proyectos, ideas creativas o oportunidades para ser parte de tus visiones."
               descriptionClassName="text-foreground/60 text-lg mb-12 leading-relaxed"
             />
+
+            <motion.button
+              type="button"
+              whileHover={{ y: -2, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={onOpenMatchStudio}
+              className="mb-10 px-6 py-3 rounded-xl border border-primary/40 bg-gradient-to-r from-primary/20 to-cyan-300/15 text-primary font-bold inline-flex items-center gap-2 hover:from-primary/30 hover:to-cyan-300/25 transition-all shadow-[0_10px_30px_rgba(161,137,255,0.2)]"
+            >
+              Abrir Project Match Studio <Sparkles size={16} />
+            </motion.button>
 
             <div className="space-y-8">
               {CONTACT_DETAILS.map((detail) => (

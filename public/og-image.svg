@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Diana Rosero Portafolio</title>
+  <desc id="desc">Portafolio profesional de desarrollo frontend y sistemas.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f0f1a" />
+      <stop offset="100%" stop-color="#1a1a2e" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a189ff" />
+      <stop offset="100%" stop-color="#3dd4ff" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" rx="24" />
+  <circle cx="1040" cy="120" r="220" fill="#a189ff" opacity="0.16" />
+  <circle cx="180" cy="540" r="180" fill="#3dd4ff" opacity="0.12" />
+
+  <rect x="80" y="90" width="1040" height="450" rx="28" fill="#101427" opacity="0.75" stroke="#ffffff" stroke-opacity="0.16" />
+
+  <text x="140" y="220" fill="#a189ff" font-family="Outfit, Segoe UI, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="4">PORTAFOLIO PROFESIONAL</text>
+  <text x="140" y="305" fill="#f5f5ff" font-family="Outfit, Segoe UI, Arial, sans-serif" font-size="72" font-weight="800">Diana Rosero</text>
+  <text x="140" y="370" fill="#d8d8f0" font-family="Outfit, Segoe UI, Arial, sans-serif" font-size="34" font-weight="500">Ingeniera de Sistemas y Frontend Developer</text>
+
+  <rect x="140" y="430" width="460" height="56" rx="14" fill="url(#accent)" opacity="0.95" />
+  <text x="168" y="467" fill="#0f0f1a" font-family="Outfit, Segoe UI, Arial, sans-serif" font-size="26" font-weight="700">React · TypeScript · Tailwind</text>
+</svg>

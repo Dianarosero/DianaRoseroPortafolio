@@ -31,14 +31,6 @@ npm run build
 ```
 Los archivos optimizados se generarán en la carpeta `dist/`.
 
-### 4. Activar modo IA opcional (free tier)
-El Project Match Studio funciona sin IA por defecto (costo cero).
-Si quieres generación con Gemini, crea tu `.env` con:
-
-```bash
-VITE_GEMINI_API_KEY="TU_API_KEY"
-```
-
 ## 🎨 Personalización de Colores
 
 Para cambiar la paleta de colores, edita el archivo `src/index.css` en la sección `@theme`:

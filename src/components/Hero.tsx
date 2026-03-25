@@ -61,11 +61,11 @@ export default function Hero(): ReactElement {
             </motion.a>
 
             <motion.a
-              href="#match-studio"
+              href="#contacto"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 border border-white/10 bg-white/5 hover:bg-white/10 px-8 py-4 rounded-xl font-bold transition-all"
-              aria-label="Ir a Project Match Studio"
+              aria-label="Ir a contacto para abrir Match Studio"
             >
               Explorar Match Studio <Compass size={18} />
             </motion.a>

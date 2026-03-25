@@ -3,18 +3,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react';
-import type { ReactElement } from 'react';
-import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useScroll, useSpring } from "motion/react";
+import type { ReactElement } from "react";
+import { useEffect, useState } from "react";
 
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import ProjectMatchStudio from './components/ProjectMatchStudio';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import About from "./components/About";
+import Skills from "./components/Skills";
+import Projects from "./components/Projects";
+import ProjectMatchStudio from "./components/ProjectMatchStudio";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
 export default function App(): ReactElement {
   const { scrollYProgress } = useScroll();
@@ -27,10 +27,10 @@ export default function App(): ReactElement {
   });
 
   useEffect(() => {
-    document.body.style.overflow = isMatchStudioOpen ? 'hidden' : '';
+    document.body.style.overflow = isMatchStudioOpen ? "hidden" : "";
 
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isMatchStudioOpen]);
 
@@ -40,22 +40,22 @@ export default function App(): ReactElement {
     }
 
     const handleEsc = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         setIsMatchStudioOpen(false);
       }
     };
 
-    window.addEventListener('keydown', handleEsc);
+    window.addEventListener("keydown", handleEsc);
 
     return () => {
-      window.removeEventListener('keydown', handleEsc);
+      window.removeEventListener("keydown", handleEsc);
     };
   }, [isMatchStudioOpen]);
 
   return (
     <div className="relative">
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-1 bg-primary z-100 origin-left"
         style={{ scaleX }}
       />
 
@@ -71,7 +71,10 @@ export default function App(): ReactElement {
 
       <AnimatePresence>
         {isMatchStudioOpen ? (
-          <ProjectMatchStudio inModal onClose={() => setIsMatchStudioOpen(false)} />
+          <ProjectMatchStudio
+            inModal
+            onClose={() => setIsMatchStudioOpen(false)}
+          />
         ) : null}
       </AnimatePresence>
 

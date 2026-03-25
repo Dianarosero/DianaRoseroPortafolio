@@ -3,13 +3,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ExternalLink, Github } from 'lucide-react';
-import { motion } from 'motion/react';
-import type { ReactElement } from 'react';
+import { ExternalLink, Github } from "lucide-react";
+import { motion } from "motion/react";
+import type { ReactElement } from "react";
 
-import SectionHeading from './SectionHeading';
-import { PROJECTS } from '../data/projects';
-import { VIEWPORT_ONCE } from '../data/animations';
+import SectionHeading from "./SectionHeading";
+import { PROJECTS } from "../data/projects";
+import { VIEWPORT_ONCE } from "../data/animations";
 
 export default function Projects(): ReactElement {
   return (
@@ -30,8 +30,8 @@ export default function Projects(): ReactElement {
             viewport={VIEWPORT_ONCE}
             className="text-foreground/50 max-w-md md:text-right"
           >
-            Una selección de mis trabajos más recientes, enfocados en la calidad del código y la
-            experiencia de usuario.
+            Una selección de mis trabajos más recientes, enfocados en la calidad
+            del código y la experiencia de usuario.
           </motion.p>
         </div>
 
@@ -52,7 +52,7 @@ export default function Projects(): ReactElement {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                <div className="absolute inset-0 bg-linear-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                   <div className="flex gap-3">
                     <a
                       href={project.demo}

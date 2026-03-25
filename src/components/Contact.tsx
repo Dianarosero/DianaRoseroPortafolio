@@ -11,14 +11,14 @@ import {
   Phone,
   Send,
   Sparkles,
-} from 'lucide-react';
-import { motion } from 'motion/react';
-import type { ChangeEvent, FormEvent, ReactElement } from 'react';
-import { useEffect, useRef, useState } from 'react';
-import SectionHeading from './SectionHeading';
-import { VIEWPORT_ONCE } from '../data/animations';
-import { SOCIAL_LINKS } from '../data/socialLinks';
-import type { SocialPlatform } from '../data/socialLinks';
+} from "lucide-react";
+import { motion } from "motion/react";
+import type { ChangeEvent, FormEvent, ReactElement } from "react";
+import { useEffect, useRef, useState } from "react";
+import SectionHeading from "./SectionHeading";
+import { VIEWPORT_ONCE } from "../data/animations";
+import { SOCIAL_LINKS } from "../data/socialLinks";
+import type { SocialPlatform } from "../data/socialLinks";
 
 interface FormState {
   name: string;
@@ -37,25 +37,25 @@ interface ContactProps {
 }
 
 const INITIAL_FORM_STATE: FormState = {
-  name: '',
-  email: '',
-  message: '',
+  name: "",
+  email: "",
+  message: "",
 };
 
 const CONTACT_DETAILS: readonly ContactDetail[] = [
   {
-    label: 'Email',
-    value: 'dianasofiaroserol@gmail.com',
+    label: "Email",
+    value: "dianasofiaroserol@gmail.com",
     icon: <Mail size={24} />,
   },
   {
-    label: 'Teléfono',
-    value: '+57 315 6268049',
+    label: "Teléfono",
+    value: "+57 315 6268049",
     icon: <Phone size={24} />,
   },
   {
-    label: 'Ubicación',
-    value: 'San Juan de Pasto, Colombia',
+    label: "Ubicación",
+    value: "San Juan de Pasto, Colombia",
     icon: <MapPin size={24} />,
   },
 ];
@@ -65,7 +65,9 @@ const SOCIAL_ICONS: Record<SocialPlatform, ReactElement> = {
   linkedin: <Linkedin size={20} />,
 };
 
-export default function Contact({ onOpenMatchStudio }: ContactProps): ReactElement {
+export default function Contact({
+  onOpenMatchStudio,
+}: ContactProps): ReactElement {
   const [formState, setFormState] = useState<FormState>(INITIAL_FORM_STATE);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -125,7 +127,7 @@ export default function Contact({ onOpenMatchStudio }: ContactProps): ReactEleme
               whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={onOpenMatchStudio}
-              className="mb-10 px-6 py-3 rounded-xl border border-primary/40 bg-gradient-to-r from-primary/20 to-cyan-300/15 text-primary font-bold inline-flex items-center gap-2 hover:from-primary/30 hover:to-cyan-300/25 transition-all shadow-[0_10px_30px_rgba(161,137,255,0.2)]"
+              className="mb-10 px-6 py-3 rounded-xl border border-primary/40 bg-linear-to-r from-primary/20 to-cyan-300/15 text-primary font-bold inline-flex items-center gap-2 hover:from-primary/30 hover:to-cyan-300/25 transition-all shadow-[0_10px_30px_rgba(161,137,255,0.2)]"
             >
               Abrir Project Match Studio <Sparkles size={16} />
             </motion.button>
@@ -153,11 +155,11 @@ export default function Contact({ onOpenMatchStudio }: ContactProps): ReactEleme
                   href={social.href}
                   whileHover={{
                     y: -5,
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    backgroundColor: "rgba(16, 185, 129, 0.1)",
                   }}
                   className="w-12 h-12 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-foreground/70 hover:text-primary transition-colors"
-                  target={social.external ? '_blank' : undefined}
-                  rel={social.external ? 'noreferrer noopener' : undefined}
+                  target={social.external ? "_blank" : undefined}
+                  rel={social.external ? "noreferrer noopener" : undefined}
                   aria-label={social.label}
                 >
                   {SOCIAL_ICONS[social.platform]}
@@ -243,7 +245,7 @@ export default function Contact({ onOpenMatchStudio }: ContactProps): ReactEleme
                   disabled={isSubmitting}
                   className="w-full bg-primary text-background font-bold py-5 rounded-xl flex items-center justify-center gap-3 disabled:opacity-50 transition-all"
                 >
-                  {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}{' '}
+                  {isSubmitting ? "Enviando..." : "Enviar Mensaje"}{" "}
                   <Send size={18} />
                 </motion.button>
               </form>

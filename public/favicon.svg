@@ -1,12 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
-  <title id="title">Diana Rosero</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#a189ff" />
-      <stop offset="100%" stop-color="#3dd4ff" />
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a0a3d"/>
+      <stop offset="100%" stop-color="#0f0a1e"/>
     </linearGradient>
+    <linearGradient id="letter" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+    <clipPath id="clip">
+      <rect x="0" y="0" width="32" height="32" rx="7"/>
+    </clipPath>
   </defs>
-  <rect width="64" height="64" rx="14" fill="#0f0f1a" />
-  <path d="M15 46V18h13.2c6.4 0 10.2 3.4 10.2 8.8 0 3.8-1.9 6.5-5 7.8L40 46h-7.6l-5.8-10.2H22.2V46H15zm7.2-15.8h5.5c2.6 0 4.2-1.3 4.2-3.5 0-2.2-1.6-3.6-4.2-3.6h-5.5v7.1z" fill="url(#g)" />
-  <circle cx="47" cy="18" r="4" fill="#3dd4ff" />
+
+  <!-- Background -->
+  <rect x="0" y="0" width="32" height="32" rx="7" fill="url(#bg)"/>
+
+  <!-- Subtle top-left glow -->
+  <circle cx="6" cy="6" r="10" fill="#7C3AED" opacity="0.18" clip-path="url(#clip)"/>
+
+  <!-- Letter D -->
+  <!-- vertical bar -->
+  <rect x="6.5" y="7.5" width="3" height="17" rx="1" fill="url(#letter)"/>
+  <!-- curved right side of D -->
+  <path d="M8.5 7.5 Q20 7.5 20 16 Q20 24.5 8.5 24.5" 
+        fill="none" stroke="url(#letter)" stroke-width="2.8" stroke-linecap="round"
+        clip-path="url(#clip)"/>
+
+  <!-- Letter R -->
+  <!-- vertical bar -->
+  <rect x="21.5" y="7.5" width="2.8" height="17" rx="1" fill="url(#letter)"/>
+  <!-- bowl of R -->
+  <path d="M23.2 7.5 Q29.5 7.5 29.5 13 Q29.5 18.5 23.2 18.5"
+        fill="none" stroke="url(#letter)" stroke-width="2.7" stroke-linecap="round"
+        clip-path="url(#clip)"/>
+  <!-- leg of R -->
+  <line x1="24.5" y1="17.5" x2="30" y2="24.5" 
+        stroke="url(#letter)" stroke-width="2.7" stroke-linecap="round"
+        clip-path="url(#clip)"/>
+
+  <!-- Accent underline -->
+  <rect x="6.5" y="26.5" width="23.5" height="1.5" rx="0.75" fill="url(#line)" opacity="0.9"/>
 </svg>

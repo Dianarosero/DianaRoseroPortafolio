@@ -4,17 +4,17 @@
  */
 
 import {
+  Download,
   Github,
   Linkedin,
   Mail,
   MapPin,
   Phone,
   Send,
-  Sparkles,
 } from "lucide-react";
 import { motion } from "motion/react";
 import type { ChangeEvent, FormEvent, ReactElement } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import SectionHeading from "./SectionHeading";
 import { VIEWPORT_ONCE } from "../data/animations";
 import { SOCIAL_LINKS } from "../data/socialLinks";
@@ -32,9 +32,8 @@ interface ContactDetail {
   readonly icon: ReactElement;
 }
 
-interface ContactProps {
-  readonly onOpenMatchStudio: () => void;
-}
+// Reemplaza este ID con el tuyo de https://formspree.io
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/dianasofiaroserol@gmail.com";
 
 const INITIAL_FORM_STATE: FormState = {
   name: "",
@@ -65,21 +64,10 @@ const SOCIAL_ICONS: Record<SocialPlatform, ReactElement> = {
   linkedin: <Linkedin size={20} />,
 };
 
-export default function Contact({
-  onOpenMatchStudio,
-}: ContactProps): ReactElement {
+export default function Contact(): ReactElement {
   const [formState, setFormState] = useState<FormState>(INITIAL_FORM_STATE);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const submitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (submitTimerRef.current) {
-        clearTimeout(submitTimerRef.current);
-      }
-    };
-  }, []);
 
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -91,19 +79,27 @@ export default function Contact({
     }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsSubmitting(true);
 
-    if (submitTimerRef.current) {
-      clearTimeout(submitTimerRef.current);
-    }
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
 
-    submitTimerRef.current = setTimeout(() => {
+      if (response.ok) {
+        setSubmitted(true);
+        setFormState(INITIAL_FORM_STATE);
+      }
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-      setFormState(INITIAL_FORM_STATE);
-    }, 1500);
+    }
   };
 
   return (
@@ -122,15 +118,15 @@ export default function Contact({
               descriptionClassName="text-foreground/60 text-lg mb-12 leading-relaxed"
             />
 
-            <motion.button
-              type="button"
+            <motion.a
+              href="/CV_Diana_Rosero.pdf"
               whileHover={{ y: -2, scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={onOpenMatchStudio}
-              className="mb-10 px-6 py-3 rounded-xl border border-primary/40 bg-linear-to-r from-primary/20 to-cyan-300/15 text-primary font-bold inline-flex items-center gap-2 hover:from-primary/30 hover:to-cyan-300/25 transition-all shadow-[0_10px_30px_rgba(161,137,255,0.2)]"
+              className="mb-10 px-6 py-3 rounded-xl border border-primary/40 bg-primary/10 text-primary font-bold inline-flex items-center gap-2 hover:bg-primary/20 transition-all"
+              aria-label="Descargar CV de Diana Rosero"
             >
-              Abrir Project Match Studio <Sparkles size={16} />
-            </motion.button>
+              Descargar CV <Download size={16} />
+            </motion.a>
 
             <div className="space-y-8">
               {CONTACT_DETAILS.map((detail) => (

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Code2, Palette, Zap } from 'lucide-react';
+import { ClipboardList, Code2, Layers } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { ReactElement } from 'react';
 import SectionHeading from './SectionHeading';
@@ -15,34 +15,25 @@ interface Feature {
   readonly description: string;
 }
 
-interface Stat {
-  readonly value: string;
-  readonly label: string;
-}
-
 const FEATURES: readonly Feature[] = [
   {
+    icon: <Layers className="text-primary" />,
+    title: 'Ciclo completo',
+    description:
+      'Del análisis de requisitos al desarrollo y entrega. Programo, documento y comunico con equipos reales.',
+  },
+  {
+    icon: <ClipboardList className="text-primary" />,
+    title: 'Gestión de proyectos',
+    description:
+      'Scrum, levantamiento de requisitos, documentación técnica y coordinación con stakeholders.',
+  },
+  {
     icon: <Code2 className="text-primary" />,
-    title: 'Desarrollo limpio',
+    title: 'Frontend funcional',
     description:
-      'Escribo código semántico, escalable y fácil de mantener siguiendo las mejores prácticas.',
+      'Interfaces con React.js y JavaScript, integradas con APIs y bases de datos SQL.',
   },
-  {
-    icon: <Palette className="text-primary" />,
-    title: 'Diseño UI/UX',
-    description: 'Enfoque en la estética y la usabilidad para crear interfaces que los usuarios amen.',
-  },
-  {
-    icon: <Zap className="text-primary" />,
-    title: 'Performance',
-    description:
-      'Optimización de carga y rendimiento para asegurar una experiencia fluida en cualquier dispositivo.',
-  },
-];
-
-const STATS: readonly Stat[] = [
-  { value: '15+', label: 'Proyectos completados' },
-  { value: '3+', label: 'Años de experiencia' },
 ];
 
 export default function About(): ReactElement {
@@ -58,28 +49,19 @@ export default function About(): ReactElement {
           >
             <SectionHeading
               eyebrow="Sobre mí"
-              title="Apasionada por la tecnología y el diseño centrado en el usuario."
+              title="Ingeniería y gestión de proyectos, de principio a fin."
               className="mb-8"
             />
             <p className="text-foreground/60 text-lg mb-6 leading-relaxed">
-              Con más de 3 años de experiencia en el ecosistema de React, he trabajado en diversos
-              proyectos
-              que van desde startups innovadoras hasta soluciones corporativas robustas.
+              Soy Ingeniera de Sistemas graduada en 2026 con Especialización en Gerencia de
+              Proyectos. Me especializo en el desarrollo y gestión de soluciones TI — desde el
+              levantamiento de requisitos hasta la entrega funcional.
             </p>
-            <p className="text-foreground/60 text-lg mb-8 leading-relaxed">
-              Mi objetivo es siempre superar las expectativas, no solo entregando un producto
-              funcional,
-              sino una pieza de software que sea un placer de usar y de mantener.
+            <p className="text-foreground/60 text-lg leading-relaxed">
+              Combino desarrollo frontend con React.js con formación en gestión de proyectos, lo
+              que me permite participar tanto en la implementación técnica como en la planificación
+              y coordinación de proyectos de software.
             </p>
-
-            <div className="grid grid-cols-2 gap-8">
-              {STATS.map((stat) => (
-                <div key={stat.label}>
-                  <h4 className="text-3xl font-bold text-primary mb-1">{stat.value}</h4>
-                  <p className="text-sm text-foreground/50 uppercase tracking-wider">{stat.label}</p>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
           <div className="grid gap-6">

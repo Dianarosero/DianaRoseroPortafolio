@@ -25,7 +25,7 @@ export default function Footer(): ReactElement {
               DS<span className="text-foreground">.dev</span>
             </div>
             <p className="text-foreground/50 text-sm">
-              Construyendo el futuro de la web, un píxel a la vez.
+              Analista & Desarrolladora de Proyectos TI · Pasto, Colombia
             </p>
           </div>
 

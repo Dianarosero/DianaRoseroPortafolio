@@ -3,11 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Compass, Mail } from 'lucide-react';
-import { motion } from 'motion/react';
-import type { ReactElement } from 'react';
-import dianitaAvatar from '../assets/Dianita_Avatar.png';
-import { VIEWPORT_ONCE } from '../data/animations';
+import { Download, FolderOpen } from "lucide-react";
+import { motion } from "motion/react";
+import type { ReactElement } from "react";
+import dianitaAvatar from "../assets/Dianita_Avatar.png";
+import { VIEWPORT_ONCE } from "../data/animations";
 
 export default function Hero(): ReactElement {
   return (
@@ -39,35 +39,39 @@ export default function Hero(): ReactElement {
             Hola, soy <span className="text-primary">Diana Rosero</span>
           </h1>
 
-          <h2 className="text-2xl md:text-3xl font-medium text-foreground/70 mb-8">
-            Ingeniera de Sistemas | Especialista en Gerencia de Proyectos (C)
+          <h2 className="text-2xl md:text-3xl font-bold text-primary mb-2">
+            Analista &amp; Desarrolladora · Proyectos TI
           </h2>
 
+          <p className="text-lg text-foreground/60 mb-6">
+            Ing. Sistemas · Esp. Gerencia de Proyectos · React · SQL
+          </p>
+
           <p className="text-lg text-foreground/60 mb-10 max-w-lg leading-relaxed">
-            Me encanta crear soluciones tecnológicas que realmente marquen la
-            diferencia. Tomo ideas complejas y las convierto en productos
-            digitales que crecen y generan un verdadero impacto.
+            Construyo soluciones TI de principio a fin — desde el análisis de
+            requisitos hasta la entrega. Desarrollo con React, gestiono con
+            metodología y entrego con calidad.
           </p>
 
           <div className="flex flex-wrap gap-4">
             <motion.a
-              href="#contacto"
+              href="#proyectos"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 bg-primary text-background px-8 py-4 rounded-xl font-bold transition-all hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]"
-              aria-label="Ir a la sección de contacto"
+              aria-label="Ir a la sección de proyectos"
             >
-              Contáctame <Mail size={18} />
+              Ver proyectos <FolderOpen size={18} />
             </motion.a>
 
             <motion.a
-              href="#contacto"
+              href="/CV_Diana_Rosero.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 border border-white/10 bg-white/5 hover:bg-white/10 px-8 py-4 rounded-xl font-bold transition-all"
-              aria-label="Ir a contacto para abrir Match Studio"
+              aria-label="Descargar CV de Diana Rosero"
             >
-              Explorar Match Studio <Compass size={18} />
+              Descargar CV <Download size={18} />
             </motion.a>
           </div>
         </motion.div>

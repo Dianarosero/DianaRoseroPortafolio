@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { RefreshCw } from 'lucide-react';
 import { motion } from 'motion/react';
-import type { Variants } from 'motion/react';
 import type { ReactElement } from 'react';
 import SectionHeading from './SectionHeading';
 import { VIEWPORT_ONCE } from '../data/animations';
@@ -12,18 +12,25 @@ import { VIEWPORT_ONCE } from '../data/animations';
 interface Skill {
   readonly name: string;
   readonly icon: string;
+  readonly iconElement?: ReactElement;
 }
 
 const SKILLS: readonly Skill[] = [
   { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-  { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
   { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-  { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
-  { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+  { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+  { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+  { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+  { name: 'SQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' },
   { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-  { name: 'Framer Motion', icon: 'https://www.framer.com/images/favicons/favicon.png' },
-  { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+  {
+    name: 'Scrum',
+    icon: '',
+    iconElement: <RefreshCw size={48} className="text-primary" />,
+  },
 ];
+
+import type { Variants } from 'motion/react';
 
 const CONTAINER_VARIANTS: Variants = {
   hidden: { opacity: 0 },
@@ -67,13 +74,19 @@ export default function Skills(): ReactElement {
               whileHover={{ y: -5, backgroundColor: 'rgba(16, 185, 129, 0.1)' }}
               className="p-8 rounded-2xl border border-white/5 bg-white/5 flex flex-col items-center justify-center gap-4 transition-colors"
             >
-              <img
-                src={skill.icon}
-                alt={skill.name}
-                className="w-12 h-12 object-contain"
-                referrerPolicy="no-referrer"
-                loading="lazy"
-              />
+              {skill.iconElement ? (
+                <div className="w-12 h-12 flex items-center justify-center">
+                  {skill.iconElement}
+                </div>
+              ) : (
+                <img
+                  src={skill.icon}
+                  alt={skill.name}
+                  className="w-12 h-12 object-contain"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                />
+              )}
               <span className="font-medium text-foreground/70">{skill.name}</span>
             </motion.div>
           ))}

@@ -1,14 +1,116 @@
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  /* Typography */
+  --font-headline: "Playfair Display", Georgia, serif;
+  --font-mono:     "Space Mono", ui-monospace, monospace;
+  --font-body:     "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:     "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* keep label alias pointing to mono for backward compat */
+  --font-label:    "Space Mono", ui-monospace, monospace;
 
-  /* Paleta de colores base (Editable por el usuario) */
-  --color-primary: #a189ff;
-  --color-background: #0f0f1a;
-  --color-surface: #1a1a2e;
-  --color-foreground: #f5f5ff;
+  /* ── New Design System — Dark Purple/Teal ── */
+
+  /* Base surfaces */
+  --color-base:         #0d0d14;
+  --color-surface:      #13131f;
+  --color-surface-alt:  #1a1a2e;
+  --color-surface-high: #1f1f30;
+
+  /* Accent — electric violet */
+  --color-accent:       #a855f7;
+  --color-accent-light: #c084fc;
+  --color-accent-dark:  #7c3aed;
+  --color-accent-faint: rgba(168, 85, 247, 0.12);
+
+  /* Teal — secondary accent */
+  --color-teal:         #34d399;
+  --color-teal-dark:    #059669;
+  --color-teal-faint:   rgba(52, 211, 153, 0.12);
+
+  /* Text */
+  --color-text:         #f1f0f5;
+  --color-text-muted:   #9d9aaa;
+  --color-text-dim:     #5c5a6a;
+
+  /* Borders */
+  --color-border:       #2a2a3d;
+  --color-border-light: rgba(255, 255, 255, 0.06);
+
+  /* Legacy aliases — keep for CaseStudyModal + other untouched components */
+  --color-background:               #0d0d14;
+  --color-primary:                  #a855f7;
+  --color-primary-container:        #7c3aed;
+  --color-on-primary:               #f1f0f5;
+  --color-secondary:                #34d399;
+  --color-secondary-container:      #059669;
+  --color-tertiary:                 #c084fc;
+  --color-surface-container:        #13131f;
+  --color-surface-container-low:    #0d0d14;
+  --color-surface-container-high:   #1f1f30;
+  --color-surface-container-highest:#252535;
+  --color-foreground:               #f1f0f5;
+  --color-foreground-muted:         #9d9aaa;
+  --color-outline-variant:          #2a2a3d;
+}
+
+/* ── Glassmorphism ── */
+
+.glass-card {
+  background: rgba(19, 19, 31, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: inset 1px 1px 0 0 rgba(255, 255, 255, 0.04);
+}
+
+.glass-panel {
+  background: rgba(13, 13, 20, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top:  1px solid rgba(255, 255, 255, 0.06);
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Ghost border — subtle containment */
+.ghost-border {
+  border: 1px solid rgba(42, 42, 61, 0.8);
+}
+
+/* Accent gradient — CTA buttons */
+.accent-glow {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+}
+
+/* Teal glow — secondary CTA */
+.teal-glow {
+  background: linear-gradient(135deg, #34d399, #059669);
+}
+
+/* Synthetic glow — backward compat alias */
+.synthetic-glow {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+}
+
+/* Dot grid texture */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(168, 85, 247, 0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Pulsing availability dot */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.75); }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+/* Timeline connector line accent glow */
+.timeline-line {
+  background: linear-gradient(to bottom, #a855f7, rgba(168, 85, 247, 0.1));
 }
 
 @layer base {
@@ -17,29 +119,32 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary;
+    @apply bg-base text-text font-body antialiased selection:bg-accent/30 selection:text-accent-light;
   }
 
-  /* Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-background;
+    background: #0d0d14;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-white/10 rounded-full hover:bg-primary/50 transition-colors;
+    background: rgba(168, 85, 247, 0.3);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 85, 247, 0.6);
   }
 }
 
 .markdown-body {
-  @apply text-foreground/80 leading-relaxed;
+  @apply text-text/80 leading-relaxed;
 }
 
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3 {
-  @apply text-foreground font-bold mt-8 mb-4;
+  @apply text-text font-bold mt-8 mb-4;
 }
 
 .markdown-body p {

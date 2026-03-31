@@ -15,12 +15,14 @@ import {
   Waypoints,
   X,
 } from 'lucide-react';
-import { motion } from 'motion/react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { useRef } from 'react';
 import type { ReactElement } from 'react';
 import { useMemo, useState } from 'react';
 
 import SectionHeading from './SectionHeading';
-import { VIEWPORT_ONCE } from '../data/animations';
+import { EASE_OUT, BATCH_START } from '../data/animations';
 import { PROJECTS } from '../data/projects';
 import { buildMatchReport, scoreProjects } from '../lib/projectMatcher';
 import type { MatchAnswers, MatchOption } from '../types/matchStudio';
@@ -147,6 +149,7 @@ export default function ProjectMatchStudio({
   onClose,
 }: ProjectMatchStudioProps): ReactElement {
   const [answers, setAnswers] = useState<DraftAnswers>(INITIAL_ANSWERS);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const selectedCount = Object.values(answers).filter(Boolean).length;
   const isComplete = isAnswersComplete(answers);
@@ -179,26 +182,39 @@ export default function ProjectMatchStudio({
     }));
   };
 
+  useGSAP(
+    () => {
+      gsap.from('.pms-heading', {
+        opacity: 0, y: 20, duration: 0.6, ease: EASE_OUT,
+        scrollTrigger: { trigger: '.pms-heading', start: BATCH_START, once: true },
+      });
+      gsap.from('.pms-form', {
+        opacity: 0, x: -24, duration: 0.6, ease: EASE_OUT,
+        scrollTrigger: { trigger: '.pms-form', start: BATCH_START, once: true },
+      });
+    },
+    { scope: sectionRef }
+  );
+
+  useGSAP(
+    () => {
+      if (!isComplete) return;
+      gsap.from('.pms-result', { opacity: 0, y: 24, duration: 0.4, ease: EASE_OUT });
+    },
+    { dependencies: [isComplete] }
+  );
+
   const studioContent = (
     <>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={VIEWPORT_ONCE}
-        className={inModal ? 'mb-8' : 'mb-12'}
-      >
+      <div className={`pms-heading ${inModal ? 'mb-8' : 'mb-12'}`}>
         <SectionHeading
           eyebrow="Innovacion"
           title="Project Match Studio"
           description="Selecciona tus criterios y desbloquea el resultado inteligente al final del formulario."
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={{ opacity: 0, x: -24 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={VIEWPORT_ONCE}
-        className="rounded-3xl border border-white/10 bg-surface/70 backdrop-blur-xl p-6 md:p-8 space-y-6"
+      <div className="pms-form rounded-3xl border border-white/10 bg-surface/70 backdrop-blur-xl p-6 md:p-8 space-y-6"
       >
         <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 p-4">
           <Sparkles className="text-primary mt-0.5" size={20} />
@@ -259,13 +275,11 @@ export default function ProjectMatchStudio({
             />
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {isComplete && matchData ? (
-        <motion.aside
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8"
+        <aside
+          className="pms-result mt-8 rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8"
           aria-live="polite"
         >
           <div className="flex items-center gap-2 mb-6 text-primary">
@@ -346,19 +360,14 @@ export default function ProjectMatchStudio({
               </ul>
             </div>
           </div>
-        </motion.aside>
+        </aside>
       ) : null}
     </>
   );
 
   if (inModal) {
     return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[120] p-4 md:p-6 flex items-center justify-center"
-      >
+      <div className="fixed inset-0 z-[120] p-4 md:p-6 flex items-center justify-center">
         <button
           type="button"
           onClick={onClose}
@@ -366,11 +375,7 @@ export default function ProjectMatchStudio({
           className="absolute inset-0 bg-background/80 backdrop-blur-sm"
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 20, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.98 }}
-          transition={{ duration: 0.25 }}
+        <div
           role="dialog"
           aria-modal="true"
           aria-label="Project Match Studio"
@@ -391,13 +396,13 @@ export default function ProjectMatchStudio({
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(161,137,255,0.25),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(100,190,255,0.22),transparent_35%),radial-gradient(circle_at_50%_80%,rgba(16,185,129,0.14),transparent_42%)]" />
             {studioContent}
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     );
   }
 
   return (
-    <section id="match-studio" className="py-24 relative overflow-hidden">
+    <section ref={sectionRef} id="match-studio" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_20%,rgba(161,137,255,0.25),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(100,190,255,0.22),transparent_35%),radial-gradient(circle_at_50%_80%,rgba(16,185,129,0.14),transparent_42%)]" />
       <div className="max-w-7xl mx-auto px-6">{studioContent}</div>
     </section>

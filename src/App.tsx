@@ -3,40 +3,49 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { motion, useScroll, useSpring } from "motion/react";
+import { useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import type { ReactElement } from "react";
 
+import "./data/animations"; // registra plugins una sola vez
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
 import Projects from "./components/Projects";
+import Experience from "./components/Experience";
+import About from "./components/About";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 export default function App(): ReactElement {
-  const { scrollYProgress } = useScroll();
+  const progressRef = useRef<HTMLDivElement>(null);
 
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
+  useGSAP(() => {
+    ScrollTrigger.create({
+      start: 0,
+      end: "max",
+      onUpdate: (self) => {
+        gsap.set(progressRef.current, { scaleX: self.progress });
+      },
+    });
   });
 
   return (
     <div className="relative">
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary z-100 origin-left"
-        style={{ scaleX }}
+      <div
+        ref={progressRef}
+        className="fixed top-0 left-0 right-0 h-[2px] bg-accent z-[100] origin-left"
+        style={{ scaleX: 0 }}
       />
 
       <Navbar />
 
       <main>
         <Hero />
-        <About />
         <Projects />
-        <Skills />
+        <Experience />
+        <About />
         <Contact />
       </main>
 
